@@ -44,6 +44,18 @@ html {
 }
 
 
+.glass-button {
+    text-decoration: none;
+    font-weight: 200;
+    color: white;
+    padding: 2% 3%;
+    border-radius: 1em;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    transition: transform 0.2s;
+}
+
+
 @media (max-width: 600px) {
     .gif {
         width: 75vw;
@@ -56,6 +68,18 @@ html {
         margin-top: -5%;
         /* Adjusted for smaller screens */
     }
+
+    .glass-button {
+        text-decoration: none;
+        font-weight: 200;
+        color: white;
+        padding: 2vw 3vw;
+        border-radius: 2vw;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        transition: transform 0.2s;
+        font-size: 3.5vw;
+    }
 }
 
 .content {
@@ -65,16 +89,7 @@ html {
 }
 
 
-.glass-button {
-    text-decoration: none;
-    font-weight: 200;
-    color: white;
-    padding: 2% 3%;
-    border-radius: 1em;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    transition: transform 0.2s;
-}
+
 
 .glass-button:hover {
     transform: scale(1.1);
