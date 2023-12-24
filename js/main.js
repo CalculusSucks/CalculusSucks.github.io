@@ -9,5 +9,5 @@ window.onload = function () {
         setTimeout(function () {
             loader.style.display = 'none'; // Hide loader after transition
         }, 1200); // Match this with CSS transition time
-    }, 0);
+    }, 2000);
 };
