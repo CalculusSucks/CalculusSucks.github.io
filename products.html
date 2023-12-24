@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Interverse Studio</title>
+    <meta name="description" content="Slider Revolution Example" />
+    <meta name="keywords" content="fullscreen image, grid layout, flexbox grid, transition" />
+    <meta name="author" content="ThemePunch" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- LOAD JQUERY LIBRARY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+
+    <!-- LOADING FONTS AND ICONS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400%7CBarlow+Condensed:300%2C500%2C600&display=swap"
+        rel="stylesheet" property="stylesheet" media="all" type="text/css">
+
+
+
+    <!-- LOADING FONTS AND ICONS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400%7CInter:400%2C800%2C300&display=swap"
+        rel="stylesheet" property="stylesheet" media="all" type="text/css">
+
+
+
+    <link rel="stylesheet" type="text/css" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="css/rs6.css">
+    <!-- REVOLUTION LAYERS STYLES -->
+    <!-- REVOLUTION JS FILES -->
+
+    <style>
+        body {
+            background-color: black;
+            background-size: auto;
+            /* Glassmorphism styles */
+            backdrop-filter: blur(10px);
+            /* Blurs the area behind the element */
+            -webkit-backdrop-filter: blur(10px);
+            /* For Safari compatibility */
+
+        }
+
+
+        .glass {
+            /* Basic setup */
+            background: rgba(0, 0, 0, 0.05);
+            /* White background with higher transparency */
+            border-radius: 15px;
+            /* Rounded corners */
+            padding: 30px;
+            /* Padding inside the element */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            /* Adding a subtle border */
+
+            /* Box Shadow for depth */
+            box-shadow: 4px 4px 18px rgba(0, 0, 0, 0.15);
+
+            /* Significantly increased Backdrop Filter for a stronger glass effect */
+            backdrop-filter: blur(30px);
+            /* Much larger blur radius */
+            -webkit-backdrop-filter: blur(30px);
+            /* For Safari */
+            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
+
+
+        }
+
+
+
+        .masonry {
+            padding: 0.4vw;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
+    <script>
+        window.RS_MODULES = window.RS_MODULES || {};
+        window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+        window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+        window.RS_MODULES.defered = true;
+        window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+        window.RS_MODULES.type = 'compiled';
+    </script>
+    <script src="js/rbtools.min.js"></script>
+    <script src="js/rs6.min.js"></script>
+
+    <script>function setREVStartSize(e) {
+            //window.requestAnimationFrame(function() {
+            window.RSIW = window.RSIW === undefined ? window.innerWidth : window.RSIW;
+            window.RSIH = window.RSIH === undefined ? window.innerHeight : window.RSIH;
+            try {
+                var pw = document.getElementById(e.c).parentNode.offsetWidth,
+                    newh;
+                pw = pw === 0 || isNaN(pw) || (e.l == "fullwidth" || e.layout == "fullwidth") ? window.RSIW : pw;
+                e.tabw = e.tabw === undefined ? 0 : parseInt(e.tabw);
+                e.thumbw = e.thumbw === undefined ? 0 : parseInt(e.thumbw);
+                e.tabh = e.tabh === undefined ? 0 : parseInt(e.tabh);
+                e.thumbh = e.thumbh === undefined ? 0 : parseInt(e.thumbh);
+                e.tabhide = e.tabhide === undefined ? 0 : parseInt(e.tabhide);
+                e.thumbhide = e.thumbhide === undefined ? 0 : parseInt(e.thumbhide);
+                e.mh = e.mh === undefined || e.mh == "" || e.mh === "auto" ? 0 : parseInt(e.mh, 0);
+                if (e.layout === "fullscreen" || e.l === "fullscreen")
+                    newh = Math.max(e.mh, window.RSIH);
+                else {
+                    e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+                    for (var i in e.rl) if (e.gw[i] === undefined || e.gw[i] === 0) e.gw[i] = e.gw[i - 1];
+                    e.gh = e.el === undefined || e.el === "" || (Array.isArray(e.el) && e.el.length == 0) ? e.gh : e.el;
+                    e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+                    for (var i in e.rl) if (e.gh[i] === undefined || e.gh[i] === 0) e.gh[i] = e.gh[i - 1];
+
+                    var nl = new Array(e.rl.length),
+                        ix = 0,
+                        sl;
+                    e.tabw = e.tabhide >= pw ? 0 : e.tabw;
+                    e.thumbw = e.thumbhide >= pw ? 0 : e.thumbw;
+                    e.tabh = e.tabhide >= pw ? 0 : e.tabh;
+                    e.thumbh = e.thumbhide >= pw ? 0 : e.thumbh;
+                    for (var i in e.rl) nl[i] = e.rl[i] < window.RSIW ? 0 : e.rl[i];
+                    sl = nl[0];
+                    for (var i in nl) if (sl > nl[i] && nl[i] > 0) { sl = nl[i]; ix = i; }
+                    var m = pw > (e.gw[ix] + e.tabw + e.thumbw) ? 1 : (pw - (e.tabw + e.thumbw)) / (e.gw[ix]);
+                    newh = (e.gh[ix] * m) + (e.tabh + e.thumbh);
+                }
+                var el = document.getElementById(e.c);
+                if (el !== null && el) el.style.height = newh + "px";
+                el = document.getElementById(e.c + "_wrapper");
+                if (el !== null && el) {
+                    el.style.height = newh + "px";
+                    el.style.display = "block";
+                }
+            } catch (e) {
+                console.log("Failure at Presize of Slider:" + e)
+            }
+            //});
+        };</script>
+
+
+</head>
+
+<body>
+
+
+
+    <header>
+
+        <img src="assets/logo white.svg" alt="Logo" id="logo">
+        <img src="assets/interverse.svg" alt="Interverse" id="interverse2">
+
+        <nav class="galaxy-menu">
+            <a href="#Products" class="galaxy-link" id="home">Products
+                <span class="r1"></span>
+                <span class="r2"></span>
+                <span class="r3"></span>
+                <span class="r4"></span>
+                <span class="r5"></span>
+
+            </a>
+
+            <a href="mailto:yourinterverse@gmail.com?subject=Contact" target="_blank" class="galaxy-link" id="contact">Contact
+                <span class="r1"></span>
+                <span class="r2"></span>
+                <span class="r3"></span>
+                <span class="r4"></span>
+                <span class="r5"></span>
+                <span class="r6"></span>
+                <span class="r7"></span>
+                <span class="r8"></span>
+                <span class="r9"></span>
+                <span class="r10"></span>
+                <span class="r11"></span>
+                <span class="r12"></span>
+                <span class="r13"></span>
+                <span class="r14"></span>
+                <span class="r15"></span>
+                <span class="r16"></span>
+                <span class="r17"></span>
+                <span class="r18"></span>
+                <span class="r19"></span>
+                <span class="r20"></span>
+            </a>
+            <a href="index.html" class="galaxy-link" id="about">About
+                <span class="r1"></span>
+
+            </a>
+            <a href="mailto:yourinterverse@gmail.com?subject=Order: [Design] [Budget]" target="_blank" class="galaxy-link" id="order">Order
+                <span class="r1"></span>
+                <span class="r6"></span>
+
+            </a>
+        </nav>
+
+    </header>
+
+
+    <style>
+        header {
+            text-align: center;
+            /* Centers the content */
+            padding: 20px 0;
+            /* Adds padding above and below the images */
+            position: relative;
+            /* Enables absolute positioning for children */
+            height: 180px;
+            /* Set a fixed height for the header */
+        }
+
+        #logo {
+            width: 120px;
+            /* Fixed size for the logo */
+            height: auto;
+            /* Maintains the aspect ratio */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Centers the logo */
+        }
+
+        #interverse2 {
+            width: 120px;
+            /* Fixed size for the logo */
+            height: auto;
+            /* Maintains the aspect ratio */
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%);
+            /* Centers the logo */
+        }
+
+        .galaxy-menu {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .galaxy-link {
+            position: absolute;
+            width: 60px;
+            /* Fixed size for circular buttons */
+            height: 60px;
+            /* Fixed size for circular buttons */
+            border-radius: 50%;
+            /* Makes the links circular */
+            background: #fff;
+            /* Background color for the links */
+            color: #000;
+            /* Text color for the links */
+            display: flex;
+            /* Allows centering content with flexbox */
+            align-items: center;
+            /* Centers content vertically */
+            justify-content: center;
+            /* Centers content horizontally */
+            text-decoration: none;
+            /* Removes underline from links */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            /* Adds some shadow for depth */
+            font-family: 'Inter';
+            font-weight: 100;
+            font-size: 12px;
+        }
+
+
+        #home {
+            top: 85%;
+            left: calc(50% - 305px);
+            transform: translate(-50%, -140%);
+            width: 65px;
+            /* Fixed size for circular buttons */
+            height: 65px;
+            /* Fixed size for circular buttons */
+            /* Additional styles for the planetary ring effect */
+            position: relative;
+            /* Needed for absolute positioning of pseudo-elements */
+        }
+
+
+
+        /* Optional: Add another ring with ::after for a more complex effect */
+        #home span {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* Height of the second ring */
+            border: 0.1px solid #ccc;
+            opacity: 0.5;
+            /* Style for the second ring */
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            /* Position and rotate the second ring */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+            /* Optional: Adds shadow for depth */
+        }
+
+        #home .r1 {
+            width: 100px;
+            height: 120px;
+        }
+
+        #home .r2 {
+            width: 90px;
+            height: 120px;
+        }
+
+        #home .r3 {
+            width: 80px;
+            height: 120px;
+        }
+
+        #home .r4 {
+            width: 70px;
+            height: 120px;
+        }
+
+        #home .r5 {
+            width: 60px;
+            height: 120px;
+        }
+
+
+
+
+
+        #contact {
+            top: 50%;
+            left: calc(50% + 280px);
+            transform: translateY(-50%);
+            width: 60px;
+            /* Fixed size for circular buttons */
+            height: 60px;
+            /* Fixed size for circular buttons */
+        }
+
+        #contact span {
+            content: '';
+            position: absolute;
+            top: 50%;
+            /* Height of the second ring */
+            border: 1px solid #ccc;
+            opacity: 0.65;
+            /* Style for the second ring */
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            /* Position and rotate the second ring */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+            /* Optional: Adds shadow for depth */
+        }
+
+
+        #contact .r5 {
+            top: calc(50% + 20px);
+            width: 10px;
+            height: 10px;
+            left: calc(100% + 2px);
+        }
+
+
+        #contact .r1 {
+            top: calc(50% + 20px);
+            width: 9px;
+            height: 9px;
+            left: calc(100% + 14px);
+        }
+
+        #contact .r2 {
+            top: calc(50% + 17px);
+            width: 10px;
+            height: 10px;
+            left: calc(100% + 24px);
+
+        }
+
+        #contact .r3 {
+            top: calc(50% + 10px);
+            width: 5px;
+            height: 5px;
+            left: calc(100% + 35px);
+
+        }
+
+        #contact .r4 {
+            top: calc(50% + 4px);
+            width: 12px;
+            height: 12px;
+            left: calc(100% + 34px);
+
+        }
+
+
+
+        #contact .r10 {
+            top: calc(50% - 3px);
+            width: 6.8px;
+            height: 5.5px;
+            left: calc(100% + 32px);
+        }
+
+
+
+        #contact .r9 {
+            top: calc(50% - 6px);
+            width: 9.8px;
+            height: 8.5px;
+            left: calc(100% + 24px);
+        }
+
+
+        #contact .r8 {
+            top: calc(50% - 7px);
+            width: 9px;
+            height: 7.5px;
+            left: calc(100% + 18px);
+        }
+
+        #contact .r7 {
+
+
+            top: calc(50% - 8px);
+            width: 7px;
+            height: 6px;
+            left: calc(100% + 8px);
+        }
+
+        #contact .r6 {
+            top: calc(50% - 10px);
+            width: 9px;
+            height: 7px;
+            left: calc(100%);
+        }
+
+
+
+
+
+
+
+        #contact .r15 {
+            top: calc(50% + 13px);
+            width: 10px;
+            height: 10px;
+            left: calc(-6px);
+        }
+
+        #contact .r11 {
+            top: calc(50% + 12px);
+            width: 9px;
+            height: 9px;
+            left: calc(-14px);
+        }
+
+        #contact .r12 {
+            top: calc(50% + 10px);
+            width: 10px;
+            height: 10px;
+            left: calc(-24px);
+
+        }
+
+        #contact .r13 {
+            top: calc(50% + 6px);
+            width: 5px;
+            height: 5px;
+            left: calc(-35px);
+
+        }
+
+        #contact .r14 {
+            top: calc(50% - 4px);
+            width: 12px;
+            height: 12px;
+            left: calc(-37px);
+
+        }
+
+
+        #contact .r20 {
+            top: calc(50% - 14px);
+            width: 6.8px;
+            height: 5.5px;
+            left: calc(-32px);
+        }
+
+        #contact .r19 {
+            top: calc(50% - 15px);
+            width: 9.8px;
+            height: 8.5px;
+            left: calc(-24px);
+        }
+
+        #contact .r18 {
+            top: calc(50% - 15px);
+            width: 9px;
+            height: 7.5px;
+            left: calc(-18px);
+        }
+
+
+
+        #contact .r17 {
+            top: calc(50% - 16px);
+            width: 7px;
+            height: 6px;
+            left: calc(-8px);
+        }
+
+        #contact .r16 {
+            top: calc(50% - 16px);
+            width: 9px;
+            height: 7px;
+            left: calc(0%);
+        }
+
+
+
+
+        #about {
+            bottom: 10%;
+            left: calc(50% + 150px);
+            transform: translateX(-50%);
+            width: 54px;
+            /* Fixed size for circular buttons */
+            height: 54px;
+            /* Fixed size for circular buttons */
+        }
+
+        #about span {
+            content: '';
+            position: absolute;
+            top: 50%;
+            /* Height of the second ring */
+            width: 90px;
+            height: 70px;
+            left: 50%;
+            border: 1px solid #ccc;
+            opacity: 0.5;
+            /* Style for the second ring */
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            /* Position and rotate the second ring */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+            /* Optional: Adds shadow for depth */
+        }
+
+        #order {
+            top: 50%;
+            left: calc(50% - 180px);
+            transform: translateY(-50%);
+            width: 58px;
+            /* Fixed size for circular buttons */
+            height: 58px;
+            /* Fixed size for circular buttons */
+        }
+
+
+        #order span {
+            content: '';
+            position: absolute;
+            top: 50%;
+            /* Height of the second ring */
+            width: 75px;
+            height: 75px;
+            left: 50%;
+            border: 1px solid #ccc;
+            opacity: 0.5;
+            /* Style for the second ring */
+            border-radius: 10%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            /* Position and rotate the second ring */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+            /* Optional: Adds shadow for depth */
+        }
+
+        #order .r1 {
+            width: 75px;
+            height: 75px;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        #order .r2 {
+            width: 75px;
+            height: 75px;
+            transform: translate(-50%, -50%) rotate(-15deg);
+        }
+
+
+        #order .r3 {
+            width: 75px;
+            height: 75px;
+            transform: translate(-50%, -50%) rotate(-30deg);
+        }
+
+        #order .r4 {
+            width: 75px;
+            height: 75px;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+
+        #order .r5 {
+            width: 75px;
+            height: 75px;
+            transform: translate(-50%, -50%) rotate(-60deg);
+        }
+
+        #order .r6 {
+            width: 75px;
+            height: 75px;
+            transform: translate(-50%, -50%) rotate(-75deg);
+        }
+    </style>
+    <!-- START OF SLIDE 2-->
+
+
+    <!-- START Architecture Process1 REVOLUTION SLIDER 6.6.13 -->
+    <p class="rs-p-wp-fix"></p>
+    <rs-module-wrap id="rev_slider_14_1_wrapper" data-alias="architecture-process1" data-source="gallery"
+        style="visibility:hidden;background:transparent;padding:2vw;padding-bottom:0;margin-top:0;margin-bottom:0;">
+        <rs-module id="rev_slider_14_1" style="" data-version="6.6.13">
+            <rs-slides style="overflow: hidden; position: absolute;">
+                <rs-slide style="position: absolute;" data-key="rs-19" data-title="Concept & Planning" data-in="o:0;"
+                    data-out="a:false;" data-p1="01">
+                    <img src="assets/transparent.png" alt="Concept & Planning" class="rev-slidebg tp-rs-img"
+                        data-bg="c:rgba(0,0,0,0);" data-parallax="off" data-no-retina>
+                    <!--						--><rs-zone id="rrzt_19" class="rev_row_zone_top" style="z-index: 6;"><!--
+
+								--><rs-row id="slider-14-slide-19-layer-3" data-type="row" data-xy="xo:50px;yo:50px;" data-basealign="slide"
+                            data-rsp_bd="off" data-padding="t:0,0,0,0;r:0,0,0,0;b:0,0,0,0;l:0,0,0,0;"
+                            data-frame_0="o:1;" data-frame_999="o:1;st:w;sp:750;sR:8700;sA:9000;" style="z-index:6;"><!--
+									--><rs-column id="slider-14-slide-19-layer-4" data-type="column" data-xy="xo:50px;yo:50px;"
+                                data-text="a:center;" data-rsp_bd="off" data-column="w:100%;" data-frame_0="o:1;"
+                                data-frame_999="o:1;st:w;sp:750;sR:8700;sA:9000;" style="z-index:6;width:100%;"><!--
+										--><rs-group id="slider-14-slide-19-layer-32" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;" data-rsp_o="off"
+                                    data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:1;st:w;sp:750;sR:14700;sA:9000;"
+                                    style="z-index:6;"><!--
+											--><rs-layer id="slider-14-slide-19-layer-1" class="rev-btn" data-type="button" data-color="#000000"
+                                        data-xy="x:r,r,l,l;xo:60px,60px,470px,50px;y:b;yo:60px,60px,50px,40px;"
+                                        data-pos="a" data-text="w:normal;s:25,22,20,20;l:70,60,50,50;fw:500;a:center;"
+                                        data-dim="minh:0px,none,none,none;"
+                                        data-actions='o:click;a:jumptoslide;slide:next;' data-rsp_o="off"
+                                        data-rsp_bd="off" data-disp="inline-block"
+                                        data-padding="r:50,40,30,30;l:50,40,30,30;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:r;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:1100;sp:1000;sR:1100;bB:20px;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:6900;"
+                                        data-frame_hover="c:#fff;bgc:#000;bor:10px,10px,10px,10px;sp:200;e:power1.inOut;"
+                                        style="z-index:9;background-color:#ffffff;font-family:'Barlow Condensed';display:inline-block;">Design
+                                        ⟶
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-19-layer-2" data-type="text"
+                                        data-xy="x:r,r,r,l;xo:40px,40px,30px,30px;y:b;yo:40px,40px,30px,30px;"
+                                        data-pos="a" data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:50%,75%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:270,250,20,20;b:30,30,80,70;l:50,50,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:r;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:1000;sp:1000;sR:1000;bB:20px;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:7000;"
+                                        style="z-index:8;background-color:rgba(0,0,0,0.1);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;">Concept & Planning</span><br />
+                                        <span style="opacity:1;"> Initiate your web project with a streamlined approach
+                                            to planning. We focus on establishing a clear and concise blueprint for your
+                                            website, ensuring that every page, feature, and element aligns perfectly
+                                            with your vision. Define your site’s architecture and user experience with
+                                            our intuitive planning tools.
+                                        </span>
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-19-layer-33" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:1;st:w;sp:750;sR:14700;"
+                                        style="z-index:7;">
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-19-layer-34" class="rs-pxl-1" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:700px,600px,500px,500px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:8000;cp:0%;"
+                                        data-frame_2="sX:1;sY:1;oX:50%;oY:50%;oZ:0;tp:600;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/istur_Neo-futuristic_house_architecture_by_david_rockwell_volum_e3bd22da-dca1-4cf4-9a52-03507d8b4435-min.png') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer><!--
+										--></rs-group><!--
+									--></rs-column><!--
+								--></rs-row><!--
+							--></rs-zone><!--
+--> </rs-slide>
+                <rs-slide style="position: absolute;" data-key="rs-20" data-title="Design & Development" data-in="o:0;"
+                    data-out="a:false;" data-p1="02">
+                    <img src="assets/transparent.png" alt="Design & Development" class="rev-slidebg tp-rs-img"
+                        data-bg="c:rgba(0,0,0,0);" data-parallax="off" data-no-retina>
+                    <!--						--><rs-zone id="rrzt_20" class="rev_row_zone_top" style="z-index: 6;"><!--
+
+								--><rs-row id="slider-14-slide-20-layer-3" data-type="row" data-xy="xo:50px;yo:50px;" data-basealign="slide"
+                            data-rsp_bd="off" data-padding="t:30,10,0,0;r:30,10,0,0;b:0,0,0,0;l:30,10,0,0;"
+                            data-frame_0="o:1;" data-frame_999="o:1;st:w;sp:750;sR:8700;sA:9000;" style="z-index:6;"><!--
+									--><rs-column id="slider-14-slide-20-layer-4" data-type="column" data-xy="xo:50px;yo:50px;"
+                                data-text="a:center;" data-rsp_bd="off" data-column="w:100%;" data-frame_0="o:1;"
+                                data-frame_999="o:1;st:w;sp:750;sR:8700;sA:9000;" style="z-index:6;width:100%;"><!--
+										--><rs-group id="slider-14-slide-20-layer-32" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;" data-rsp_o="off"
+                                    data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:1;st:w;sp:750;sR:14700;sA:9000;"
+                                    style="z-index:6;"><!--
+											--><rs-layer id="slider-14-slide-20-layer-1" class="rev-btn" data-type="button" data-color="#000000"
+                                        data-xy="x:r,r,l,l;xo:60px,60px,470px,50px;y:b;yo:60px,60px,50px,40px;"
+                                        data-pos="a" data-text="w:normal;s:25,22,20,20;l:70,60,50,50;fw:500;a:center;"
+                                        data-dim="minh:0px,none,none,none;"
+                                        data-actions='o:click;a:jumptoslide;slide:next;' data-rsp_o="off"
+                                        data-rsp_bd="off" data-disp="inline-block"
+                                        data-padding="r:50,40,30,30;l:50,40,30,30;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:r;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:1100;sp:1000;sR:1100;bB:20px;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:6900;"
+                                        data-frame_hover="c:#fff;bgc:#000;bor:10px,10px,10px,10px;sp:200;e:power1.inOut;"
+                                        style="z-index:9;background-color:#ffffff;font-family:'Barlow Condensed';display:inline-block;">Launch
+                                        ⟶
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-20-layer-2" data-type="text"
+                                        data-xy="x:r,r,r,l;xo:40px,40px,30px,30px;y:b;yo:40px,40px,30px,30px;"
+                                        data-pos="a" data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:50%,75%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:270,250,20,20;b:30,30,80,70;l:50,50,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:r;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:1000;sp:1000;sR:1000;bB:20px;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:7000;"
+                                        style="z-index:8;background-color:rgba(0,0,0,0.1);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;">Design &
+                                            Develop</span><br />
+                                        <span style="opacity:1;">
+                                            Transform your initial concepts into a tangible reality. During the design
+                                            and development stage, we combine aesthetics with functionality,
+                                            ensuring your site is not only visually appealing but also user-friendly.
+
+                                        </span>
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-20-layer-33" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:1;st:w;sp:750;sR:14700;"
+                                        style="z-index:7;">
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-20-layer-34" class="rs-pxl-1" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:700px,600px,500px,500px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:8000;cp:0%;"
+                                        data-frame_2="sX:1;sY:1;oX:50%;oY:50%;oZ:0;tp:600;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/istur_Neo-futuristic_house_with_pool_architecture_by_david_rock_7564a601-7d1e-4705-a72c-308c38d1332d-min.png') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer><!--
+										--></rs-group><!--
+									--></rs-column><!--
+								--></rs-row><!--
+							--></rs-zone><!--
+--> </rs-slide>
+                <rs-slide style="position: absolute;" data-key="rs-21" data-title="Your Dream Website" data-in="o:0;"
+                    data-out="a:false;" data-p1="03">
+                    <img src="assets/transparent.png" alt="Your Dream Website" class="rev-slidebg tp-rs-img"
+                        data-bg="c:rgba(0,0,0,0);" data-parallax="off" data-no-retina>
+                    <!--						--><rs-zone id="rrzt_21" class="rev_row_zone_top" style="z-index: 6;"><!--
+
+								--><rs-row id="slider-14-slide-21-layer-3" data-type="row" data-xy="xo:50px;yo:50px;" data-basealign="slide"
+                            data-rsp_bd="off" data-padding="t:30,10,0,0;r:30,10,0,0;b:0,0,0,0;l:30,10,0,0;"
+                            data-frame_0="o:1;" data-frame_999="o:1;st:w;sp:750;sR:8700;sA:9000;" style="z-index:6;"><!--
+									--><rs-column id="slider-14-slide-21-layer-4" data-type="column" data-xy="xo:50px;yo:50px;"
+                                data-text="a:center;" data-rsp_bd="off" data-column="w:100%;" data-frame_0="o:1;"
+                                data-frame_999="o:1;st:w;sp:750;sR:8700;sA:9000;" style="z-index:6;width:100%;"><!--
+										--><rs-group id="slider-14-slide-21-layer-32" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;" data-rsp_o="off"
+                                    data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:1;st:w;sp:750;sR:14700;sA:9000;"
+                                    style="z-index:6;"><!--
+											--><rs-layer id="slider-14-slide-21-layer-1" class="rev-btn" data-type="button" data-color="#000000"
+                                        data-xy="x:r,r,l,l;xo:60px,60px,470px,50px;y:b;yo:60px,60px,50px,40px;"
+                                        data-pos="a" data-text="w:normal;s:25,22,20,20;l:70,60,50,50;fw:500;a:center;"
+                                        data-dim="minh:0px,none,none,none;"
+                                        data-actions='id:goto_contact;o:click;a:scrollto;sp:500ms;e:power1.inOut;'
+                                        data-rsp_o="off" data-rsp_bd="off" data-disp="inline-block"
+                                        data-padding="r:50,40,30,30;l:50,40,30,30;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:r;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:1100;sp:1000;sR:1100;bB:20px;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:6900;"
+                                        data-frame_hover="c:#fff;bgc:#000;bor:10px,10px,10px,10px;sp:200;e:power1.inOut;"
+                                        style="z-index:9;background-color:#ffffff;font-family:'Barlow Condensed';display:inline-block;">Order
+                                        Now
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-21-layer-2" data-type="text"
+                                        data-xy="x:r,r,r,l;xo:40px,40px,30px,30px;y:b;yo:40px,40px,30px,30px;"
+                                        data-pos="a" data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:50%,75%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:270,250,20,20;b:30,30,80,70;l:50,50,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:r;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:1000;sp:1000;sR:1000;bB:20px;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:7000;"
+                                        style="z-index:8;background-color:rgba(0,0,0,0.1);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;">Launch Your Dream
+                                            Website</span><br />
+                                        <span style="opacity:1;">The final stage is where your dream becomes a digital
+                                            destination. We're ready to launch your website and introduce your brand to
+                                            the world. With cutting-edge SEO strategies and robust testing protocols, we
+                                            ensure your website is primed for performance and visibility. Your dream
+                                            website isn't just a concept—it's a fully operational platform designed to
+                                            grow with you.
+                                        </span>
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-21-layer-33" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:1;st:w;sp:750;sR:14700;"
+                                        style="z-index:7;">
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-14-slide-21-layer-34" class="rs-pxl-1" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:700px,600px,500px,500px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:8000;cp:0%;"
+                                        data-frame_2="sX:1;sY:1;oX:50%;oY:50%;oZ:0;tp:600;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/istur_Neo-futuristic_house_with_pool_architecture_by_david_rock_997de75f-5df4-4851-89b3-9ab751d93bbf-min.png') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer><!--
+										--></rs-group><!--
+									--></rs-column><!--
+								--></rs-row><!--
+							--></rs-zone><!--
+--> </rs-slide>
+            </rs-slides>
+        </rs-module>
+        <script>
+
+        </script>
+        <script>
+            if (typeof revslider_showDoubleJqueryError === "undefined") { function revslider_showDoubleJqueryError(sliderID) { console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion."); console.log("To fix this, you can:"); console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on"); console.log("2. Find the double jQuery.js inclusion and remove it"); return "Double Included jQuery Library"; } }
+        </script>
+    </rs-module-wrap>
+    <!-- END REVOLUTION SLIDER -->
+
+    <script>
+        var tpj = jQuery;
+        if (window.RS_MODULES === undefined) window.RS_MODULES = {};
+        if (RS_MODULES.modules === undefined) RS_MODULES.modules = {};
+        RS_MODULES.modules["revslider141"] = {
+            once: RS_MODULES.modules["revslider141"] !== undefined ? RS_MODULES.modules["revslider141"].once : undefined, init: function () {
+                window.revapi14 = window.revapi14 === undefined || window.revapi14 === null || window.revapi14.length === 0 ? document.getElementById("rev_slider_14_1") : window.revapi14;
+                if (window.revapi14 === null || window.revapi14 === undefined || window.revapi14.length == 0) { window.revapi14initTry = window.revapi14initTry === undefined ? 0 : window.revapi14initTry + 1; if (window.revapi14initTry < 20) requestAnimationFrame(function () { RS_MODULES.modules["revslider141"].init() }); return; }
+                window.revapi14 = jQuery(window.revapi14);
+                if (window.revapi14.revolution == undefined) { revslider_showDoubleJqueryError("rev_slider_14_1"); return; }
+                revapi14.revolutionInit({
+                    revapi: "revapi14",
+                    sliderType: "carousel",
+                    DPR: "dpr",
+                    sliderLayout: "fullwidth",
+                    visibilityLevels: "1240,1024,778,480",
+                    gridwidth: "1240,1024,778,480",
+                    gridheight: "760,620,500,500",
+                    perspective: 600,
+                    perspectiveType: "global",
+                    editorheight: "760,620,500,500",
+                    responsiveLevels: "1240,1024,778,480",
+                    stopAtSlide: 1,
+                    stopAfterLoops: 0,
+                    stopLoop: true,
+                    carousel: {
+                        showLayersAllTime: "all",
+                        justifyMaxWidth: true,
+                        stopOnClick: false,
+                        maxVisibleItems: 1,
+                        stretch: true,
+                        fadeout: false,
+                        skewX: "0deg"
+                    },
+                    progressBar: { disableProgressBar: true },
+                    navigation: {
+                        wheelCallDelay: 1000,
+                        onHoverStop: false,
+                        tabs: {
+                            enable: true,
+                            tmp: "<div class=\"tp-tab-content\">  <span class=\"tp-tab-date\">{{param1}}</span>  <span class=\"tp-tab-title\">{{title}}</span></div>",
+                            style: "arch_tabs",
+                            hide_onmobile: true,
+                            hide_under: 778,
+                            v_align: "top",
+                            v_offset: 10,
+                            space: 5,
+                            width: 250,
+                            min_width: 250,
+                            wrapper_padding: 20,
+                            wrapper_color: "transparent"
+                        }
+                    },
+                    parallax: {
+                        levels: [2, -2, 15, 20, 25, -5, -10, -15, 45, 46, 47, 48, 49, 50, 51, 30],
+                        type: "mouse",
+                        origo: "slidercenter",
+                        speed: 0
+                    },
+                    viewPort: {
+                        global: false,
+                        globalDist: "-200px",
+                        enable: true
+                    },
+                    fallbacks: {
+                        allowHTML5AutoPlayOnAndroid: true
+                    },
+                });
+
+            }
+        } // End of RevInitScript
+        if (window.RS_MODULES.checkMinimal !== undefined) { window.RS_MODULES.checkMinimal(); };
+    </script>
+
+
+
+    <style>
+        #rev_slider_14_1_wrapper .arch_tabs {
+            backdrop-filter: blur(20px)
+        }
+
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab {
+            opacity: 1;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: Barlow Condensed;
+            background: #fff;
+            border-radius: 10px
+        }
+
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab-content {
+            background: rgba(0, 0, 0, 0);
+            position: relative;
+            padding: 0;
+            left: 20px;
+            overflow: hidden;
+            box-sizing: border-box;
+            color: #ffffff;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            position: absolute
+        }
+
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab-date {
+            display: inline-block;
+            color: #000000;
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 50px;
+            float: left;
+            margin-top: -1px
+        }
+
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab-title {
+            display: inline-block;
+            text-align: left;
+            color: #000000;
+            font-size: 20px;
+            font-weight: 300;
+            text-transform: none;
+            line-height: 50px;
+            float: left;
+            margin-top: -1px;
+            margin-left: 10px
+        }
+
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab.rs-touchhover,
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab.selected {
+            background: #000000;
+            border-radius: 10px
+        }
+
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab.rs-touchhover .tp-tab-date,
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab.selected .tp-tab-date {
+            color: #ffffff
+        }
+
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab.rs-touchhover .tp-tab-title,
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab.selected .tp-tab-title {
+            color: #ffffff
+        }
+
+        #rev_slider_14_1_wrapper .arch_tabs .tp-tab-mask {}
+
+        @media only screen and (max-width:960px) {}
+
+        @media only screen and (max-width:768px) {}
+    </style>
+
+
+
+
+
+
+
+
+    <!-- START Architecture Portfolio1 REVOLUTION SLIDER 6.6.13 -->
+    <p class="rs-p-wp-fix"></p>
+    <rs-module-wrap id="goto_portfolio_wrapper" data-alias="architecture-portfolio1" data-source="gallery"
+        style="visibility:hidden;background:transparent;padding:0;margin:0px auto;margin-bottom:0;">
+        <rs-module id="goto_portfolio" style="" data-version="6.6.13">
+            <rs-slides style="overflow: hidden; position: absolute;">
+                <rs-slide style="position: absolute;" data-key="rs-23" data-title="Slide" data-in="o:0;"
+                    data-out="a:false;">
+                    <img src="assets/transparent.png" alt="Slide" class="rev-slidebg tp-rs-img"
+                        data-bg="c:rgba(0,0,0,0);" data-parallax="off" data-no-retina>
+                    <!--						--><rs-zone id="rrzt_23" class="rev_row_zone_top" style="z-index: 8;">
+
+
+
+
+
+                        <rs-row id="slider-16-slide-23-layer-333" data-type="row" data-xy="xo:50px;yo:50px;"
+                            data-basealign="slide" data-rsp_bd="off"
+                            data-padding="t:0,0,0,0;r:30,10,0,0;l:30,10,0,0;b:0,0,0,0" data-frame_0="o:1;"
+                            data-frame_999="o:0;st:w;sR:14700;sA:15000;" style="z-index:7;">
+
+
+
+                            <rs-column class="masonry" id="slider-16-slide-23-layer-44" data-type="column"
+                                data-xy="xo:50px;yo:50px;" data-text="a:center;" data-rsp_bd="off" data-frame_0="o:1;"
+                                data-frame_999="o:0;st:w;sR:14700;sA:15000;" style="z-index:8;width:100%;padding-top:0"><!--
+									-->
+
+                                <rs-group id="slider-16-slide-23-layer-133" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;" data-rsp_o="off"
+                                    data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:0;st:w;sR:14700;sA:15000;"
+                                    style="z-index:6;"><!--
+										-->
+
+
+
+
+
+
+
+
+
+                                    <!--
+
+											--><rs-layer id="slider-14-slide-19-layer-2" data-type="text" data-xy="x:m,m,m,m;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:50%,75%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:270,250,20,20;b:30,30,80,70;l:50,50,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:r;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:1000;sp:1000;sR:1000;bB:20px;"
+                                        data-frame_999="o:1;st:w;sp:750;sR:7000;"
+                                        style="z-index:8;background-color:rgba(0,0,0,0.1);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;">Explore Designs</span><br />
+                                        <span style="opacity:1;">
+
+                                            Endless possibilities await—whether you have a preference for a sleek and
+                                            modern aesthetic, an elegant and sophisticated look, or you’re seeking
+                                            something truly unique and distinctive, we have the expertise to bring your
+                                            vision to life.
+                                    </rs-layer>
+
+
+
+                                    <rs-layer id="slider-16-slide-23-layer-1" data-type="shape" data-xy="x:c;y:m;"
+                                        data-pos="a" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:100%;" data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:0;st:w;sR:14700;" style="z-index:7;">
+                                    </rs-layer><!--
+
+										--><rs-layer id="slider-16-slide-23-layer-2" class="rs-pxl-1" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:500px,400px,400px,400px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:0;st:w;sR:8000;"
+                                        data-frame_2="sX:1;sY:1;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/banner.jpg') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer>
+
+
+
+
+                                    <!--
+									--></rs-group><!--
+								--></rs-column>
+
+                        </rs-row>
+
+
+
+
+
+
+
+
+
+
+
+                        <rs-row id="Products" data-type="row" data-xy="xo:50px;yo:50px;" data-basealign="slide"
+                            data-rsp_bd="off" data-padding="t:30,10,0,0;r:30,10,0,0;l:30,10,0,0;" data-frame_0="o:1;"
+                            data-frame_999="o:0;st:w;sR:14700;sA:15000;" style="z-index:7;">
+
+
+
+
+
+
+
+                            <rs-column class="masonry" id="slider-16-slide-23-layer-4" data-type="column"
+                                data-xy="xo:50px;yo:50px;" data-text="a:center;" data-rsp_bd="off" data-frame_0="o:1;"
+                                data-frame_999="o:0;st:w;sR:14700;sA:15000;" style="z-index:8;width:100%;"><!--
+									-->
+
+                                <rs-group id="slider-16-slide-23-layer-13" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;"
+                                    data-actions='o:mouseenter;a:startlayer;layer:slider-16-slide-23-layer-46;ch:true;||o:mouseleave;a:stoplayer;layer:slider-16-slide-23-layer-46;ch:true;'
+                                    data-rsp_o="off" data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:0;st:w;sR:14700;sA:15000;"
+                                    style="z-index:6;cursor:pointer"><!--
+										-->
+
+
+
+
+                                    <rs-layer id="slider-16-slide-23-layer-46" data-type="text"
+                                        data-xy="x:c;y:b;yo:40px,40px,30px,30px;" data-pos="a"
+                                        data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:70%,70%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:30,30,20,20;b:30,30,20,20;l:30,30,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:cv;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:a;sp:500;sR:1000;bB:20px;"
+                                        data-frame_999="st:a;sR:7000;auto:true;"
+                                        style="z-index:8;background-color:rgba(255,255,255,0.2);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;color:black">E-Commerce Art
+                                            Store</span><br />
+                                        <span style="opacity:1;color:black">An artistic e-commerce website featuring a
+                                            collection with minimalist design and pastel colors.
+                                        </span>
+                                    </rs-layer><!--
+
+										--><rs-layer id="slider-16-slide-23-layer-1" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:0;st:w;sR:14700;" style="z-index:7;">
+                                    </rs-layer><!--
+
+										--><rs-layer id="slider-16-slide-23-layer-2" class="rs-pxl-1" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:500px,400px,400px,400px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:0;st:w;sR:8000;"
+                                        data-frame_2="sX:1;sY:1;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/5.webp') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer>
+
+
+
+
+                                    <!--
+									--></rs-group><!--
+								--></rs-column>
+
+
+
+
+
+
+                            <!--
+
+									--><rs-column class="masonry" id="slider-16-slide-23-layer-0" data-type="column" data-xy="xo:50px;yo:50px;"
+                                data-text="a:center;" data-rsp_bd="off" data-frame_0="o:1;"
+                                data-frame_999="o:0;st:w;sR:14700;sA:15000;" style="z-index:7;width:100%;"><!--
+										--><rs-group id="slider-16-slide-23-layer-44" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;"
+                                    data-actions='o:mouseenter;a:startlayer;layer:slider-16-slide-23-layer-49;ch:true;||o:mouseleave;a:stoplayer;layer:slider-16-slide-23-layer-49;ch:true;'
+                                    data-rsp_o="off" data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:0;st:w;sR:14700;sA:15000;"
+                                    style="z-index:6; cursor:pointer;"><!--
+											--><rs-layer id="slider-16-slide-23-layer-49" data-type="text" data-xy="x:c;y:b;yo:40px,40px,30px,30px;"
+                                        data-pos="a" data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:70%,70%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:30,30,20,20;b:30,30,20,20;l:30,30,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:cv;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:a;sp:500;sR:1000;bB:20px;"
+                                        data-frame_999="st:a;sR:7000;auto:true;"
+                                        style="z-index:8;background-color:rgba(255,255,255,0.6);font-family:'Barlow Condensed';color:black"><span
+                                            style="font-weight:500;font-size:1.3em;color:black">Photography
+                                            Collection</span><br />
+                                        <span style="opacity:1;color:black">A lush, dark-toned botanical photography
+                                            portfolio showcasing various green plants with deep shadows.</span>
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-45" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:0;st:w;sR:14700;" style="z-index:7;">
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-47" class="rs-pxl-1" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:500px,400px,400px,400px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:0;st:w;sR:8000;"
+                                        data-frame_2="sX:1;sY:1;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/7.webp') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer><!--
+										--></rs-group><!--
+									--></rs-column><!--
+
+									--><rs-column class="masonry" id="slider-16-slide-23-layer-5" data-type="column" data-xy="xo:50px;yo:250px;"
+                                data-rsp_bd="off" data-frame_0="o:1;" data-frame_999="o:0;st:w;sA:15000;"
+                                style="z-index:6;width:100%;"><!--
+										--><rs-group id="slider-16-slide-23-layer-6" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;"
+                                    data-actions='o:mouseenter;a:startlayer;layer:slider-16-slide-23-layer-32;ch:true;||o:mouseleave;a:stoplayer;layer:slider-16-slide-23-layer-32;ch:true;'
+                                    data-rsp_o="off" data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:0;st:w;sR:14700;sA:15000;"
+                                    style="z-index:6; cursor:pointer;"><!--
+											--><rs-layer id="slider-16-slide-23-layer-32" data-type="text" data-xy="x:c;y:b;yo:40px,40px,30px,30px;"
+                                        data-pos="a" data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:70%,70%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:30,30,20,20;b:30,30,20,20;l:30,30,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:cv;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:a;sp:500;sR:1000;bB:20px;"
+                                        data-frame_999="st:a;sR:7000;auto:true;"
+                                        style="z-index:8;background-color:rgba(255,255,255,0.2);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;color:black">Business
+                                            Portfolio</span><br />
+                                        <span style="opacity:1;color:black">A clean
+                                            and modern design with minimalist elements and a monochromatic palette,
+                                            catering to business professionals.</span>
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-7" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:0;st:w;sR:14700;" style="z-index:7;">
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-17" class="rs-pxl-2" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:500px,400px,400px,400px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:0;st:w;sR:8000;"
+                                        data-frame_2="sX:1;sY:1;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/6.webp') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer><!--
+										--></rs-group><!--
+									--></rs-column><!--
+								--></rs-row><!--
+
+								--><rs-row id="slider-16-slide-23-layer-22" data-type="row" data-xy="xo:50px;yo:50px;" data-basealign="slide"
+                            data-rsp_bd="off" data-padding="r:30,10,0,0;b:30,10,0,0;l:30,10,0,0;" data-frame_0="o:1;"
+                            data-frame_999="o:0;st:w;sR:14700;sA:15000;" style="z-index:6;"><!--
+									--><rs-column class="masonry" id="slider-16-slide-23-layer-26" data-type="column" data-xy="xo:50px;yo:50px;"
+                                data-text="a:center;" data-rsp_bd="off" data-column="w:50%;" data-frame_0="o:1;"
+                                data-frame_999="o:0;st:w;sR:14700;sA:15000;" style="z-index:7;width:100%;"><!--
+										--><rs-group id="slider-16-slide-23-layer-27" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;"
+                                    data-actions='o:mouseenter;a:startlayer;layer:slider-16-slide-23-layer-33;ch:true;||o:mouseleave;a:stoplayer;layer:slider-16-slide-23-layer-33;ch:true;'
+                                    data-rsp_o="off" data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:0;st:w;sR:14700;sA:15000;"
+                                    style="z-index:6; cursor:pointer;"><!--
+											--><rs-layer id="slider-16-slide-23-layer-33" data-type="text" data-xy="x:c;y:m,m,b,b;yo:0,0,30px,30px;"
+                                        data-pos="a" data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:70%,70%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:30,30,20,20;b:30,30,20,20;l:30,30,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:cv;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:a;sp:500;sR:1000;bB:20px;"
+                                        data-frame_999="st:a;sR:7000;auto:true;"
+                                        style="z-index:8;background-color:rgba(255,255,255,0.2);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;color:black">E-Commerce</span><br />
+                                        <span style="opacity:1;color:black">Presents a clinical
+                                            and pristine design with an emphasis on the sleekness of the beauty device
+                                            and includes Korean typography.</span>
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-28" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:0;st:w;sR:14700;" style="z-index:7;">
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-29" class="rs-pxl-3" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:1000px,800px,400px,400px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:0;st:w;sR:8000;"
+                                        data-frame_2="sX:1;sY:1;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/3.webp') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer><!--
+										--></rs-group><!--
+									--></rs-column><!--
+
+									--><rs-column id="slider-16-slide-23-layer-30" data-type="column" data-xy="xo:50px;yo:50px;"
+                                data-text="a:center;" data-rsp_bd="off" data-column="w:50%;" data-frame_0="o:1;"
+                                data-frame_999="o:0;st:w;sR:14700;sA:15000;" style="z-index:6;width:100%;"><!--
+										--><rs-group class="masonry" id="slider-16-slide-23-layer-24" data-type="group" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;"
+                                    data-actions='o:mouseenter;a:startlayer;layer:slider-16-slide-23-layer-34;ch:true;||o:mouseleave;a:stoplayer;layer:slider-16-slide-23-layer-34;ch:true;'
+                                    data-rsp_o="off" data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:0;st:w;sR:14700;sA:15000;"
+                                    style="z-index:6; cursor:pointer;"><!--
+											--><rs-layer id="slider-16-slide-23-layer-34" data-type="text" data-xy="x:c;y:b;yo:40px,40px,30px,30px;"
+                                        data-pos="a" data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:70%,70%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:30,30,20,20;b:30,30,20,20;l:30,30,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:cv;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:a;sp:500;sR:1000;bB:20px;"
+                                        data-frame_999="st:a;sR:7000;auto:true;"
+                                        style="z-index:8;background-color:rgba(255,255,255,0.6);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;color:black">Social Media
+                                            Platform</span><br />
+                                        <span style="opacity:1;color:black">Offers a user-friendly and inviting
+                                            interface with gentle colors and clear prompts for user engagement.</span>
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-25" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:0;st:w;sR:14700;" style="z-index:7;">
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-31" class="rs-pxl-1" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:500px,400px,400px,400px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:0;st:w;sR:8000;"
+                                        data-frame_2="sX:1;sY:1;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/2.jpg') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer><!--
+										--></rs-group><!--
+
+										--><rs-group class="masonry" id="slider-16-slide-23-layer-11" data-type="group" data-xy="x:c;y:m;"
+                                    data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;"
+                                    data-actions='o:mouseenter;a:startlayer;layer:slider-16-slide-23-layer-15;ch:true;||o:mouseleave;a:stoplayer;layer:slider-16-slide-23-layer-15;ch:true;'
+                                    data-rsp_o="off" data-rsp_bd="off" data-frame_0="o:1;" data-frame_0_mask="u:t;"
+                                    data-frame_1_mask="u:t;" data-frame_999="o:0;st:w;sR:14700;sA:15000;"
+                                    style="z-index:6; cursor:pointer;"><!--
+											--><rs-layer id="slider-16-slide-23-layer-15" data-type="text" data-xy="x:c;y:b;yo:40px,40px,30px,30px;"
+                                        data-pos="a" data-text="w:normal;s:20,20,18,18;l:30,30,24,24;fw:300;"
+                                        data-dim="w:70%,70%,300px,250px;" data-basealign="slide" data-rsp_o="off"
+                                        data-rsp_bd="off"
+                                        data-padding="t:30,30,20,20;r:30,30,20,20;b:30,30,20,20;l:30,30,20,20;"
+                                        data-border="bor:10px,10px,10px,10px;" data-clip="u:true;o:cv;"
+                                        data-frame_0="o:1;bB:20px;cp:0%;"
+                                        data-frame_1="e:circ.inOut;st:a;sp:500;sR:1000;bB:20px;"
+                                        data-frame_999="st:a;sR:7000;auto:true;"
+                                        style="z-index:8;background-color:rgba(255,255,255,0.6);font-family:'Barlow Condensed';"><span
+                                            style="font-weight:500;font-size:1.3em;color:black">Landing
+                                            Page</span><br />
+                                        <span style="opacity:1;color:black">Dominates with a bold and graphic
+                                            typographic representation, highlighting the theme of creativity and design
+                                            in web development.</span>
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-12" data-type="shape" data-xy="x:c;y:m;" data-pos="a"
+                                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;" data-dim="w:100%;h:100%;"
+                                        data-rsp_o="off" data-rsp_bd="off"
+                                        data-border="bos:solid;boc:rgba(0,0,0,0);bow:20px,20px,20px,20px;"
+                                        data-frame_0="o:1;" data-frame_999="o:0;st:w;sR:14700;" style="z-index:7;">
+                                    </rs-layer><!--
+
+											--><rs-layer id="slider-16-slide-23-layer-14" class="rs-pxl-1" data-type="shape" data-rsp_ch="on" data-xy=""
+                                        data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                        data-dim="w:100%;h:500px,400px,400px,400px;"
+                                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-clip="u:true;o:cv;"
+                                        data-frame_0="sX:1.5;sY:1.5;o:1;cp:0%;"
+                                        data-frame_1="sX:1.1;sY:1.1;e:power2.in;sp:1000;cp:100%;"
+                                        data-frame_999="o:0;st:w;sR:8000;"
+                                        data-frame_2="sX:1;sY:1;e:power2.out;st:1000;sp:1000;"
+                                        style="z-index:6;"><rs-bg-elem
+                                            style="background: url('assets/1.webp') no-repeat center center; background-size: cover;"></rs-bg-elem>
+
+                                    </rs-layer><!--
+										--></rs-group><!--
+									--></rs-column><!--
+								--></rs-row><!--
+							--></rs-zone><!--
+--> </rs-slide>
+            </rs-slides>
+        </rs-module>
+        <script>
+
+        </script>
+        <script>
+            if (typeof revslider_showDoubleJqueryError === "undefined") { function revslider_showDoubleJqueryError(sliderID) { console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion."); console.log("To fix this, you can:"); console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on"); console.log("2. Find the double jQuery.js inclusion and remove it"); return "Double Included jQuery Library"; } }
+        </script>
+    </rs-module-wrap>
+    <!-- END REVOLUTION SLIDER -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="css/revolution.addon.transitionpack.css">
+    <!-- START Artistic Parallax Slider2 REVOLUTION SLIDER 6.6.13 -->
+    <p class="rs-p-wp-fix"></p>
+    <rs-module-wrap id="rev_slider_19_1_wrapper" data-alias="artistic-parallax-slider2" data-source="gallery"
+        style="visibility:hidden;background:transparent;padding:0;">
+        <rs-module id="rev_slider_19_1" class="rs-respect-topbar" style="" data-version="6.6.13">
+            <rs-slides style="overflow: hidden; position: absolute;">
+                <rs-slide style="position: absolute;" data-key="rs-52" data-title="Slide"
+                    data-anim="eng:transitionPack;d:20;e:tpbasic;ms:1000ms;" data-in="o:1;" data-out="a:false;"
+                    data-tpack='ie:sine.inOut;ef:skew;prange:100;sko:0;x:0;y:(2);sh:;shx:0;shy:0;shz:0;shr:0;shv:10%;iny:10%;pp:blur;ppbt:motion;ppfbw:;'>
+                    <img src="assets/sld3-bg.jpeg" alt="" title="sld3-bg.jpeg" width="1920" height="1080"
+                        class="rev-slidebg tp-rs-img" data-parallax="off" data-panzoom="d:10000;ss:120%;se:100%;"
+                        data-no-retina>
+                    <!--						--><rs-zone id="rrzm_52" class="rev_row_zone_middle" style="z-index: 6;"><!--
+
+						--><rs-row id="slider-19-slide-52-layer-1" data-type="row" data-xy="xo:50px;yo:50px;" data-cbreak="3"
+                            data-rsp_bd="off" data-margin="r:50,40,40,40;l:50,40,40,40;" data-frame_0="y:bottom;o:1;"
+                            data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                            data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sA:9000;"
+                            data-frame_999_reverse="y:true;" style="z-index:6;"><!--
+							--><rs-column id="slider-19-slide-52-layer-2" data-type="column" data-xy="xo:50px;yo:50px;" data-rsp_bd="off"
+                                data-column="w:66.67%;" data-frame_0="o:1;" data-frame_999="o:1;st:w;sA:9000;"
+                                style="z-index:7;width:100%;"><!--
+								--><rs-layer id="slider-19-slide-52-layer-6" data-type="text"
+                                    data-tsh="c:rgba(0,0,0,0.15);v:20px,16px,12px,7px;b:35px,28px,21px,12px;"
+                                    data-rsp_ch="on" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:150,110,80,49;l:120,100,70,43;ls:-1px,0px,0px,0px;fw:800;"
+                                    data-padding="t:35,29,22,14;b:35,29,22,14;" data-frame_0="y:bottom;o:1;"
+                                    data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                                    data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;"
+                                    data-frame_999_reverse="y:true;"
+                                    style="z-index:7;font-family:'Inter';">stellar<br />
+                                    websites
+                                </rs-layer><!--
+
+								--><rs-layer id="slider-19-slide-52-layer-5" data-type="text" data-rsp_ch="on" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:20,18,20,16;l:25,20,30,25;ls:1px,0px,0px,0px;"
+                                    data-margin="t:20,17,13,8;b:165,136,155,50;" data-padding="l:10,8,6,4;"
+                                    data-frame_0="y:bottom;o:1;" data-frame_0_reverse="y:true;"
+                                    data-frame_1="e:sine.inOut;sp:1000;"
+                                    data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;"
+                                    data-frame_999_reverse="y:true;"
+                                    style="z-index:6;font-family:'Inter';text-transform:uppercase;"> <br />
+                                    <br />
+                                    <br />
+
+                                </rs-layer><!--
+							--></rs-column><!--
+
+							--><rs-column id="slider-19-slide-52-layer-7" data-type="column" data-xy="xo:50px;yo:50px;" data-text="a:right;"
+                                data-rsp_bd="off" data-column="a:bottom;" data-frame_0="o:1;"
+                                data-frame_999="o:1;st:w;sA:9000;" style="z-index:6;width:100%;"><!--
+								--><rs-layer id="slider-19-slide-52-layer-8" data-type="text" data-rsp_ch="on" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:24,18,18,16;l:30,24,22,24;fw:300;a:right;"
+                                    data-margin="b:30,25,25,15;" data-frame_0="y:bottom;o:1;"
+                                    data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                                    data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;"
+                                    data-frame_999_reverse="y:true;" style="z-index:7;font-family:'Inter';">With every
+                                    line of code and pixel we mold, Your website emerges, like a planet, a masterpiece
+                                    to behold.
+                                </rs-layer><!--
+							--></rs-column><!--
+						--></rs-row><!--
+					--></rs-zone><!--
+
+					--><rs-layer id="slider-19-slide-52-layer-33" class="rs-noevents" data-type="image" data-rsp_ch="on"
+                        data-xy="x:c;y:b;" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:100%,1207px,917px,983px;h:auto,160px,121px,130px;" data-basealign="slide"
+                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-frame_0="y:bottom;o:1;"
+                        data-frame_1="e:sine.inOut;sp:800;" data-frame_999="y:bottom;o:1;e:sine.inOut;st:w;sp:600;"
+                        data-frame_2="sX:1.15;sY:1.15;e:none;st:1000;sp:8000;" style="z-index:8;"><img
+                            src="assets/land.png" alt="" class="tp-rs-img" width="1920" height="254" data-no-retina>
+                    </rs-layer><!--
+
+					--><rs-layer id="slider-19-slide-52-layer-34" class="rs-noevents" data-type="image" data-rsp_ch="on"
+                        data-xy="x:c;y:b;yo:0,10px,10px,10px;" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:488px,402px,409px,318px;h:335px,276px,281px,218px;"
+                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-frame_0="y:bottom;o:1;"
+                        data-frame_1="e:sine.inOut;sp:800;" data-frame_999="y:bottom;o:1;e:sine.inOut;st:w;sp:600;"
+                        data-frame_2="sX:1.15;sY:1.15;e:none;st:1000;sp:8000;" style="z-index:9;"><img
+                            src="assets/people.png" alt="" class="tp-rs-img" width="488" height="335" data-no-retina>
+                    </rs-layer><!--
+
+					--><rs-layer id="slider-19-slide-52-layer-35" class="rs-pxl-1" data-type="image" data-rsp_ch="on"
+                        data-xy="x:c;y:m;yo:-100px,-82px,-120px,-74px;" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:550px,454px,380px,234px;h:549px,453px,379px,233px;"
+                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-frame_0="y:bottom;o:1;"
+                        data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                        data-frame_999="y:top;sX:1;sY:1;o:1;e:sine.inOut;st:w;sp:800;" data-frame_999_reverse="y:true;"
+                        data-frame_2="sX:1.15;sY:1.15;e:none;st:1000;sp:8000;" style="z-index:4;"><img
+                            src="assets/planet.png" alt="" class="tp-rs-img" width="550" height="549" data-no-retina>
+                    </rs-layer><!--
+--> </rs-slide>
+                <rs-slide style="position: absolute;" data-key="rs-54" data-title="Slide"
+                    data-anim="eng:transitionPack;d:20;e:tpbasic;ms:1000ms;" data-in="o:1;" data-out="a:false;"
+                    data-tpack='ie:sine.inOut;ef:skew;prange:100;sko:0;x:0;y:(2);sh:;shx:0;shy:0;shz:0;shr:0;shv:10%;iny:10%;pp:blur;ppbt:motion;ppfbw:;'>
+                    <img src="assets/sld4-bg.jpeg" alt="" title="sld4-bg.jpeg" width="1920" height="1080"
+                        class="rev-slidebg tp-rs-img" data-parallax="off" data-panzoom="d:10000;ss:120%;se:100%;"
+                        data-no-retina>
+                    <!--						--><rs-zone id="rrzm_54" class="rev_row_zone_middle" style="z-index: 10;"><!--
+
+						--><rs-row id="slider-19-slide-54-layer-1" data-type="row" data-xy="xo:50px;yo:50px;" data-cbreak="3"
+                            data-rsp_bd="off" data-margin="r:50,40,40,40;l:50,40,40,40;" data-frame_0="y:bottom;o:1;"
+                            data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                            data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;sA:9000;"
+                            data-frame_999_reverse="y:true;" style="z-index:6;"><!--
+							--><rs-column id="slider-19-slide-54-layer-2" data-type="column" data-xy="xo:50px;yo:50px;" data-text="a:right;"
+                                data-rsp_bd="off" data-column="w:100%;" data-frame_0="o:1;"
+                                data-frame_999="o:1;st:w;sR:8700;sA:9000;" style="z-index:6;width:100%;"><!--
+								--><rs-layer id="slider-19-slide-54-layer-5" data-type="text" data-color="#212221" data-rsp_ch="on" data-xy=""
+                                    data-pos="r"
+                                    data-text="w:normal;s:20,18,20,16;l:25,25,30,25;ls:1px,0px,0px,0px;a:center;"
+                                    data-margin="t:20,17,0,40;b:0,0,5,4;" data-padding="l:45,85,66,27;"
+                                    data-frame_0="y:bottom;o:1;" data-frame_0_reverse="y:true;"
+                                    data-frame_1="e:sine.inOut;sp:1000;"
+                                    data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;"
+                                    data-frame_999_reverse="y:true;"
+                                    style="z-index:10;font-family:'Inter';text-transform:uppercase;">websites • APPS •
+                                    SOCIAL NETWORKS • e-learning • e-commerce
+                                </rs-layer><!--
+
+								--><rs-layer id="slider-19-slide-54-layer-6" data-type="text" data-color="#212221" data-rsp_ch="on" data-xy=""
+                                    data-pos="r"
+                                    data-text="w:normal;s:150,110,80,49;l:120,100,70,43;ls:-1px,0px,0px,0px;fw:800;a:center;"
+                                    data-margin="b:0,0,10,0;" data-padding="t:35,29,22,14;b:35,29,22,14;"
+                                    data-frame_0="y:bottom;o:1;" data-frame_0_reverse="y:true;"
+                                    data-frame_1="e:sine.inOut;sp:1000;"
+                                    data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;"
+                                    data-frame_999_reverse="y:true;" style="z-index:9;font-family:'Inter';">your vision
+                                    come true
+                                </rs-layer><!--
+
+								--><rs-layer id="slider-19-slide-54-layer-8" data-type="text" data-rsp_ch="on" data-xy="" data-pos="r"
+                                    data-text="w:normal;s:24,18,18,16;l:30,24,22,24;fw:300;a:right;"
+                                    data-dim="w:#1/3#,#1/3#,#2/3#,auto;" data-disp="inline-block"
+                                    data-margin="b:30,25,25,15;" data-padding="r:35,70,60,19;"
+                                    data-frame_0="y:bottom;o:1;" data-frame_0_reverse="y:true;"
+                                    data-frame_1="e:sine.inOut;sp:1000;"
+                                    data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;"
+                                    data-frame_999_reverse="y:true;"
+                                    style="z-index:8;font-family:'Inter';display:inline-block;">Turn your vision into
+                                    reality with the Interverse.
+                                </rs-layer><!--
+
+								--><rs-layer id="slider-19-slide-54-layer-3" data-type="shape" data-rsp_ch="on"
+                                    data-xy="xo:50px,41px,31px,19px;yo:50px,41px,31px,19px;" data-pos="r"
+                                    data-text="w:normal;s:20,16,12,7;c:both;l:0,20,15,9;" data-flcr="c:both;"
+                                    data-dim="w:100%;h:10px,8px,6px,3px;" data-frame_999="o:0;st:w;sR:8700;"
+                                    style="z-index:7;">
+                                </rs-layer><!--
+							--></rs-column><!--
+						--></rs-row><!--
+					--></rs-zone><!--
+
+					--><rs-group id="slider-19-slide-54-layer-37" class="rs-pxl-1" data-type="group" data-rsp_ch="on"
+                        data-xy="x:c;y:m;yo:-60px,-49px,-37px,-22px;" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:505px,367px,386px,238px;h:700px,509px,537px,331px;" data-frame_0="y:bottom;o:1;"
+                        data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                        data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;sA:9000;"
+                        data-frame_999_reverse="y:true;" data-loop_0="y:-10;"
+                        data-loop_999="y:10;sp:6000;e:sine.inOut;yym:t;" style="z-index:8;"><!--
+						--><rs-layer id="slider-19-slide-54-layer-13" data-type="image" data-rsp_ch="on" data-xy="x:c;" data-pos="a"
+                            data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                            data-dim="w:507px,368px,388px,239px;h:169px,122px,128px,78px;" data-frame_0="o:1;"
+                            data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8700;"
+                            data-frame_999_reverse="y:true;" style="z-index:7;"><img src="assets/ufo.png" alt=""
+                                class="tp-rs-img" width="507" height="169" data-no-retina>
+                        </rs-layer><!--
+
+						--><rs-layer id="slider-19-slide-54-layer-36" data-type="image" data-rsp_ch="on"
+                            data-xy="x:c;y:m;yo:40px,29px,31px,19px;" data-pos="a"
+                            data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                            data-dim="w:288px,209px,220px,135px;h:532px,386px,407px,251px;" data-frame_1="sp:1500;"
+                            data-frame_999="y:top;sX:1;sY:1;o:1;e:sine.inOut;st:w;sp:800;sR:7500;"
+                            data-frame_999_reverse="y:true;" data-loop_0="o:0.2;"
+                            data-loop_999="blu:4;sp:5;e:sine.inOut;yyf:t;" style="z-index:6;"><img src="assets/beam.png"
+                                alt="" class="tp-rs-img" width="288" height="532" data-no-retina>
+                        </rs-layer><!--
+					--></rs-group><!--
+
+					--><rs-layer id="slider-19-slide-54-layer-4" class="rs-pxl-1" data-type="image" data-rsp_ch="on"
+                        data-xy="x:r;xo:200px,-300px,-300px,-185px;yo:50px,41px,50px,30px;"
+                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:1047px,864px,656px,404px;h:436px,360px,273px,168px;" data-basealign="slide"
+                        data-frame_0="y:bottom;o:1;" data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                        data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;" data-frame_999_reverse="y:true;"
+                        data-loop_0="y:-5px;" data-loop_999="y:5px;sX:0.95;sY:0.95;sp:9000;e:sine.inOut;yym:t;yys:t;"
+                        style="z-index:5;"><img src="assets/cloud1.png" alt="" class="tp-rs-img" width="1047"
+                            height="436" data-no-retina>
+                    </rs-layer><!--
+
+					--><rs-layer id="slider-19-slide-54-layer-12" class="rs-pxl-2" data-type="image" data-rsp_ch="on"
+                        data-xy="xo:400px,200px,150px,92px;yo:120px,99px,150px,92px;"
+                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:336px,277px,210px,129px;h:140px,115px,87px,53px;" data-basealign="slide"
+                        data-frame_0="y:bottom;o:1;" data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                        data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;" data-frame_999_reverse="y:true;"
+                        data-loop_0="y:-5px;" data-loop_999="y:5px;sX:0.95;sY:0.95;sp:9000;e:sine.inOut;yym:t;yys:t;"
+                        style="z-index:4;"><img src="assets/cloud1.png" alt="" class="tp-rs-img" width="1047"
+                            height="436" data-no-retina>
+                    </rs-layer><!--
+
+					--><rs-layer id="slider-19-slide-54-layer-18" class="rs-pxl-2" data-type="image" data-rsp_ch="on"
+                        data-xy="x:r;xo:150px,123px,93px,57px;y:m;yo:-360px,-297px,-225px,-138px;"
+                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:105px,86px,65px,40px;h:35px,28px,21px,12px;" data-frame_0="y:bottom;o:1;"
+                        data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                        data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;" data-frame_999_reverse="y:true;"
+                        data-loop_0="x:10px;" data-loop_999="x:-10px;sp:8000;e:sine.inOut;yym:t;"
+                        style="z-index:6;"><img src="assets/ufo.png" alt="" class="tp-rs-img" width="507" height="169"
+                            data-no-retina>
+                    </rs-layer><!--
+
+					--><rs-layer id="slider-19-slide-54-layer-25" class="rs-pxl-2" data-type="image" data-rsp_ch="on"
+                        data-xy="xo:80px,66px,50px,30px;y:m;yo:-280px,-231px,-175px,-107px;"
+                        data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:165px,136px,103px,63px;h:55px,45px,34px,20px;" data-frame_0="y:bottom;o:1;"
+                        data-frame_0_reverse="y:true;" data-frame_1="e:sine.inOut;sp:1000;"
+                        data-frame_999="y:top;o:1;e:sine.inOut;st:w;sp:800;sR:8000;" data-frame_999_reverse="y:true;"
+                        data-loop_0="x:-10px;" data-loop_999="x:10px;sp:8000;e:sine.inOut;yym:t;"
+                        style="z-index:7;"><img src="assets/ufo.png" alt="" class="tp-rs-img" width="507" height="169"
+                            data-no-retina>
+                    </rs-layer><!--
+
+					--><rs-layer id="slider-19-slide-54-layer-33" class="rs-noevents" data-type="image" data-rsp_ch="on"
+                        data-xy="x:c;y:b;" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                        data-dim="w:100%,1493px,1790px,1411px;h:auto,337px,404px,318px;" data-basealign="slide"
+                        data-ford="frame_0;frame_1;frame_2;frame_999;" data-frame_0="y:bottom;o:1;"
+                        data-frame_1="e:sine.inOut;sp:1000;" data-frame_999="y:bottom;o:1;e:sine.inOut;st:w;sp:800;"
+                        data-frame_2="sX:1.15;sY:1.15;e:none;st:1000;sp:8000;" style="z-index:12;"><img
+                            src="assets/man-field.png" alt="" class="tp-rs-img" width="1920" height="433"
+                            data-no-retina>
+                    </rs-layer><!--
+--> </rs-slide>
+            </rs-slides>
+            <rs-static-layers><!--
+				--><rs-zone id="rrzt_16" class="rev_row_zone_top" style="z-index: 7;"><!--
+
+						--><rs-row id="slider-19-slide-16-layer-10" class="rs-layer-static" data-type="row" data-xy="xo:50px;yo:50px;"
+                        data-vbility="t,t,t,f" data-rsp_bd="off" data-onslides="s:1;"
+                        data-margin="t:50,40,40,40;r:50,160,160,160;l:50,160,160,160;" data-frame_0="y:top;o:1;"
+                        data-frame_1="e:sine.inOut;sp:1000;" data-frame_999="o:0;st:w;sA:9000;" style="z-index:6;"><!--
+							--><rs-column id="slider-19-slide-16-layer-11" class="rs-layer-static" data-type="column"
+                            data-xy="xo:50px;yo:50px;" data-rsp_bd="off" data-onslides="s:1;" data-column="w:100%;"
+                            data-frame_0="o:1;" data-frame_999="o:0;st:w;sA:9000;"
+                            style="z-index:6;width:100%;"><!--									--></rs-column><!--
+						--></rs-row><!--
+					--></rs-zone><!--
+				--><rs-zone id="rrzb_16" class="rev_row_zone_bottom" style="z-index: 5;"><!--
+
+						--><rs-row id="slider-19-slide-16-layer-15" class="rs-layer-static" data-type="row" data-xy="xo:50px;yo:50px;"
+                        data-cbreak="nobreak" data-rsp_bd="off" data-onslides="s:1;"
+                        data-margin="r:50,160,160,20;b:50,40,40,25;l:50,160,160,20;" data-frame_0="y:bottom;o:1;"
+                        data-frame_1="e:sine.inOut;sp:1000;" data-frame_999="o:0;st:w;sA:9000;" style="z-index:6;"><!--
+							--><rs-column id="slider-19-slide-16-layer-16" class="rs-layer-static" data-type="column"
+                            data-xy="xo:50px;yo:50px;" data-rsp_bd="off" data-onslides="s:1;" data-column="w:50%;"
+                            data-frame_0="o:1;" data-frame_999="o:0;st:w;sA:9000;"
+                            style="z-index:7;width:100%;"><!--									--></rs-column><!--
+
+							--><rs-column id="slider-19-slide-16-layer-17" class="rs-layer-static" data-type="column"
+                            data-xy="xo:50px;yo:50px;" data-text="a:right;" data-rsp_bd="off" data-onslides="s:1;"
+                            data-column="w:50%;a:middle;" data-frame_0="o:1;" data-frame_999="o:0;st:w;sA:9000;"
+                            style="z-index:6;width:100%;"><!--
+								--><rs-layer id="slider-19-slide-16-layer-22" class="rs-layer-static" data-type="text" data-rsp_ch="on"
+                                data-xy="" data-pos="r" data-text="w:normal;s:20,20,20,18;l:50,40,40,40;fw:300;"
+                                data-actions='o:click;a:jumptoslide;slide:previous;' data-onslides="s:1;"
+                                data-disp="inline-block" data-margin="r:-1;" data-padding="r:20,17,20,20;l:20,17,20,20;"
+                                data-border="bos:solid;boc:rgba(255, 255, 255, 0);bow:1px,1px,1px,1px;"
+                                data-frame_999="o:0;st:w;"
+                                data-frame_hover="boc:rgba(255,255,255,0.5);bos:solid;bow:1px,1px,1px,1px;"
+                                style="z-index:8;font-family:'Inter';cursor:pointer;display:inline-block;"><i
+                                    class="fa-angle-up"></i>
+                            </rs-layer><!--
+
+								--><rs-layer id="slider-19-slide-16-layer-24" class="rs-layer-static" data-type="shape" data-rsp_ch="on"
+                                data-xy="" data-pos="r" data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                                data-dim="w:1px;h:50px,40px,40px,40px;" data-onslides="s:1;" data-disp="inline-block"
+                                data-frame_999="o:0;st:w;"
+                                style="z-index:7;background-color:rgba(255,255,255,0.5);display:inline-block;">
+                            </rs-layer><!--
+
+								--><rs-layer id="slider-19-slide-16-layer-23" class="rs-layer-static" data-type="text" data-rsp_ch="on"
+                                data-xy="" data-pos="r" data-text="w:normal;s:20,20,20,18;l:50,40,40,40;fw:300;"
+                                data-actions='o:click;a:jumptoslide;slide:next;' data-onslides="s:1;"
+                                data-disp="inline-block" data-margin="l:-1;" data-padding="r:20,17,20,20;l:20,17,20,20;"
+                                data-border="bos:solid;boc:rgba(255, 255, 255, 0);bow:1px,1px,1px,1px;"
+                                data-frame_999="o:0;st:w;"
+                                data-frame_hover="boc:rgba(255,255,255,0.5);bos:solid;bow:1px,1px,1px,1px;"
+                                style="z-index:6;font-family:'Inter';cursor:pointer;display:inline-block;"><i
+                                    class="fa-angle-down"></i>
+                            </rs-layer><!--
+							--></rs-column><!--
+						--></rs-row><!--
+					--></rs-zone><!--
+			--></rs-static-layers>
+        </rs-module>
+        <script>
+
+        </script>
+        <script>
+            if (typeof revslider_showDoubleJqueryError === "undefined") { function revslider_showDoubleJqueryError(sliderID) { console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion."); console.log("To fix this, you can:"); console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on"); console.log("2. Find the double jQuery.js inclusion and remove it"); return "Double Included jQuery Library"; } }
+        </script>
+    </rs-module-wrap>
+    <!-- END REVOLUTION SLIDER -->
+
+    <script>
+        var tpj = jQuery;
+        if (window.RS_MODULES === undefined) window.RS_MODULES = {};
+        if (RS_MODULES.modules === undefined) RS_MODULES.modules = {};
+        RS_MODULES.modules["revslider191"] = {
+            once: RS_MODULES.modules["revslider191"] !== undefined ? RS_MODULES.modules["revslider191"].once : undefined, init: function () {
+                window.revapi19 = window.revapi19 === undefined || window.revapi19 === null || window.revapi19.length === 0 ? document.getElementById("rev_slider_19_1") : window.revapi19;
+                if (window.revapi19 === null || window.revapi19 === undefined || window.revapi19.length == 0) { window.revapi19initTry = window.revapi19initTry === undefined ? 0 : window.revapi19initTry + 1; if (window.revapi19initTry < 20) requestAnimationFrame(function () { RS_MODULES.modules["revslider191"].init() }); return; }
+                window.revapi19 = jQuery(window.revapi19);
+                if (window.revapi19.revolution == undefined) { revslider_showDoubleJqueryError("rev_slider_19_1"); return; }
+                revapi19.revolutionInit({
+                    revapi: "revapi19",
+                    DPR: "dpr",
+                    sliderLayout: "fullscreen",
+                    visibilityLevels: "1240,1024,778,480",
+                    gridwidth: "1240,1024,778,480",
+                    gridheight: "900,768,960,720",
+                    perspective: 600,
+                    perspectiveType: "global",
+                    editorheight: "900,768,960,720",
+                    responsiveLevels: "1240,1024,778,480",
+                    fullScreenOffsetContainer: "#masthead",
+                    progressBar: {
+                        style: "vertical",
+                        horizontal: "right",
+                        vertical: "top",
+                        size: "3px",
+                        visibility: {
+                            3: false
+                        },
+
+                    },
+                    navigation: {
+                        mouseScrollNavigation: "on",
+                        wheelViewPort: 100,
+                        wheelCallDelay: 1000,
+                        onHoverStop: false,
+                        touch: {
+                            touchenabled: true
+                        }
+                    },
+                    parallax: {
+                        levels: [2, -2, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48, 49, 50, 51, 30],
+                        type: "mouse",
+                        origo: "slidercenter",
+                        speed: 0
+                    },
+                    viewPort: {
+                        global: false,
+                        globalDist: "-200px",
+                        enable: false
+                    },
+                    fallbacks: {
+                        allowHTML5AutoPlayOnAndroid: true
+                    },
+                });
+
+                if (revapi19 !== undefined) jQuery.fn.revolution.transitionpackInit(revapi19[0].id, { url: "" });
+                window.TP_SHDRS = window.TP_SHDRS || {};
+                window.TP_SHDRS.skew = window.TP_SHDRS.skew || ` uniform float left; uniform float top; uniform int dir; uniform float intensity; uniform float origin; uniform bool sh; uniform float shx; uniform float shy; uniform float shr; uniform float shz; uniform float shv; uniform float prange; uniform float progress; uniform vec4 resolution; uniform sampler2D src1; uniform sampler2D src2; varying vec2 vUv; float pi = 3.141592653; float map(float a, float b, float c, float d, float v){ return clamp((v-a)*(d-c)/(b-a) + c, 0., 1.); } vec2 mirror(vec2 v) { vec2 m = mod(v, 2.0); return mix(m, 2.0 - m, step(1.0, m)); } vec2 rotateUV(vec2 uv, float rotation, vec2 mid){ return vec2( cos(rotation) * (uv.x - mid.x) + sin(rotation) * (uv.y - mid.y) + mid.x, cos(rotation) * (uv.y - mid.y) - sin(rotation) * (uv.x - mid.x) + mid.y ); } vec2 getAngle(vec2 p1){ return vec2(.5, .5) * normalize(p1); } float qinticOut(float t, float power) { return 1.0 - pow(1. - t, power); } float elasticOut(float t) { return sin(13.0 * t * pi / shv) * pow(5.5, 3. * (t - 1.0)); } vec2 shake(vec2 uv, float p, float shx, float shy, float tilt, float z) { float m = elasticOut(p); float n = (1. - p) * p; if (tilt != 0.) { float tmc = (1. - m) * m * n; uv = rotateUV(uv, tmc * tilt,vec2(.5,.5)); } if (z != 0.) { p = p * p; uv.x -= 0.5; uv.y -= 0.5; uv *= (z * p * n + 1.); uv.x += 0.5; uv.y += 0.5; } if (shx != 0. && shy != 0.) { uv.x += m * shx * 2. * n; uv.y -= m * (1. - m) * shy * n; } return uv; } void main() { vec2 uv = vUv; vec2 vw = uv; vec2 vwo = vw; float m = progress; float steps = 1.0/(max(abs(left),abs(top)) + 2.); float ms = m; if(sh) ms = qinticOut(m, 10.); float flip = (m -0.5) * 2.; float mult = sin(ms * pi); mult = min(mult, 0.5); if(dir == 1 || dir == 2) mult /= 10.; if(dir == 1) { float shift = origin <= 0.5 ? uv.y - origin : origin - uv.y; float shift2 = origin == 0. || origin == 1. ? 1. : origin; vw.x += sign(left) * mix( shift, shift - 1., ms) * intensity; } else if (dir == 2) { float shift = origin <= 0.5 ? uv.x - origin : origin - uv.x; float shift2 = origin == 0. || origin == 1. ? 1. : origin; vw.y += sign(top) * mix(shift, shift - shift2, ms) * intensity; } else { vec2 d1 = getAngle(vec2(0.5 * top, 0.5 * left)); vec2 d2 = getAngle(vec2(0.5 * top, 0.5 * left)); float l1 = length(vec2(left > 0. ? 1. - uv.x : uv.x, top > 0. ? 1. - uv.y : uv.y)); float l2 = length(vec2(left > 0. ? uv.x : 1. - uv.x, top > 0. ? uv.y : 1. - uv.y)); vec2 a = vw + l1 * d1 * flip * (step(top * left, 0.) - 0.5) * intensity; vec2 b = vw + l2 * d2 * flip * (step(top * left, 0.) - 0.5) * intensity; vw = mix(a, b, ms); } uv = mix(vwo, vw, mult); if(sh) uv = shake(uv, 1. - m, shx, shy, shr, shz); vec2 nUv = vec2(uv.x + ms  * left, uv.y + ms * top); nUv = mirror(nUv); vec2 nUvIn = nUv; if(mod(left, 2.0) != 0.) nUvIn.x *= -1.; if(mod(top, 2.0) != 0.) nUvIn.y *= -1.; float nprog = map((0.5 - prange),(0.5+prange),0.,1.,ms); vec4 col = mix(TEXTURE2D(src1, nUv),  TEXTURE2D(src2, nUvIn), nprog); gl_FragColor = col; }`;
+
+            }
+        } // End of RevInitScript
+        if (window.RS_MODULES.checkMinimal !== undefined) { window.RS_MODULES.checkMinimal(); };
+    </script>
+
+
+
+    <script src="js/revolution.addon.transitionpack.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script
+        type="text/javascript">window.RVS = window.RVS || {}; window.RVS.ENV = window.RVS.ENV || {}; window.RVS.ENV.TRANSITIONPACK_URL = "";</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        var tpj = jQuery;
+        if (window.RS_MODULES === undefined) window.RS_MODULES = {};
+        if (RS_MODULES.modules === undefined) RS_MODULES.modules = {};
+        RS_MODULES.modules["gotoportfolio"] = {
+            once: RS_MODULES.modules["gotoportfolio"] !== undefined ? RS_MODULES.modules["gotoportfolio"].once : undefined, init: function () {
+                window.revapi16 = window.revapi16 === undefined || window.revapi16 === null || window.revapi16.length === 0 ? document.getElementById("goto_portfolio") : window.revapi16;
+                if (window.revapi16 === null || window.revapi16 === undefined || window.revapi16.length == 0) { window.revapi16initTry = window.revapi16initTry === undefined ? 0 : window.revapi16initTry + 1; if (window.revapi16initTry < 20) requestAnimationFrame(function () { RS_MODULES.modules["gotoportfolio"].init() }); return; }
+                window.revapi16 = jQuery(window.revapi16);
+                if (window.revapi16.revolution == undefined) { revslider_showDoubleJqueryError("goto_portfolio"); return; }
+                revapi16.revolutionInit({
+                    revapi: "revapi16",
+                    sliderType: "hero",
+                    DPR: "dpr",
+                    sliderLayout: "fullwidth",
+                    duration: "15000ms",
+                    visibilityLevels: "1240,1024,778,480",
+                    gridwidth: "1240,1024,778,480",
+                    gridheight: "1955,1470,2608,2522",
+                    perspective: 600,
+                    perspectiveType: "global",
+                    editorheight: "1955,1470,2608,2522",
+                    responsiveLevels: "1240,1024,778,480",
+
+                    progressBar: { disableProgressBar: true },
+                    navigation: {
+                        onHoverStop: false
+                    },
+                    parallax: {
+                        levels: [1, -1, 2, -2, 25, -5, -10, -15, 45, 46, 47, 48, 49, 50, 51, 30],
+                        type: "mouse",
+                        origo: "slidercenter",
+                        speed: 0
+                    },
+                    viewPort: {
+                        global: false,
+                        globalDist: "-200px",
+                        enable: true,
+                        visible_area: "300px"
+                    },
+                    fallbacks: {
+                        allowHTML5AutoPlayOnAndroid: true
+                    },
+                });
+
+            }
+        } // End of RevInitScript
+        if (window.RS_MODULES.checkMinimal !== undefined) { window.RS_MODULES.checkMinimal(); };
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        #site-footer {
+            background: black;
+            /* or any other color you want for the footer */
+            color: white;
+            /* text color */
+            padding: 20px 0;
+            /* Adjust the padding to increase the height of the footer */
+        }
+
+        #site-footer .grid-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* centers vertically in the flex container */
+            align-items: center;
+            /* centers horizontally in the flex container */
+            min-height: 350px;
+            /* increases the minimum height of the footer */
+
+        }
+
+        #site-footer .site-footer-inner {
+            width: 100%;
+            /* full width of the footer */
+            max-width: 1200px;
+            /* or the max-width you desire */
+            text-align: center;
+            /* centers the text inside the footer inner */
+        }
+
+        #site-footer .footer-payment {
+            display: flex;
+            justify-content: center;
+            /* centers the payment icons horizontally */
+            align-items: center;
+            /* centers the payment icons vertically */
+        }
+
+        #site-footer .footer-payment .footer-credit-card-icons img {
+            max-width: 50px;
+            /* sets a maximum width for the payment icons */
+            max-height: 30px;
+            /* sets a maximum height for the payment icons */
+            margin: 0 5px;
+            /* adds spacing between the icons */
+        }
+
+        #site-footer .footer_text {
+            font-family: sans-serif;
+            padding: 20px 0;
+            /* adds padding above and below the copyright text */
+        }
+
+        #site-footer .widget-area {
+            display: none;
+            /* hides the widget area, remove if you have widgets to show */
+        }
+    </style>
+
+
+    <footer id="site-footer" data-footer-copy="2" style="opacity: 1; visibility: inherit;">
+
+
+        <!-- begin grid-container -->
+        <div class="grid-container">
+            <div class="site-footer-inner">
+                <div class="widget-area">
+
+                    <div class="grid-x grid-padding-x small-up-1 large-up-1">
+                        <div class="cell text-left">
+                            <aside id="nav_menu-1" class="widget widget_nav_menu"></aside>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+                <!-- begin copyright-section -->
+                <div class="copyright-section">
+                    <!-- begin grid-x -->
+                    <div class="grid-x grid-padding-x">
+
+                        <!-- begin cell -->
+                        <div class="cell large-4">
+                        </div>
+                        <!-- end cell -->
+                        <!-- begin cell -->
+                        <div class="cell large-4 footer_text"
+                            style="color:white;font-family:'font-family:'Inter','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">
+                            © 2023 <strong>The Interverse</strong>. All rights reserved </div>
+                        <!-- end cell -->
+                        <!-- begin cell -->
+                        <div class="cell large-4 footer-payment">
+
+                            <div class="footer-credit-card-icons">
+                                <img src="assets/visa.png" alt="Visa" title="Visa"><img src="assets/mastercard.png"
+                                    alt="MasterCard" title="MasterCard"><img src="assets/amex.png" alt="Amex"
+                                    title="Amex"><img src="assets/paypal.png" alt="PayPal" title="PayPal"><img
+                                    src="assets/amazon.png" alt="Amazon" title="Amazon">
+                            </div>
+
+
+                        </div>
+                        <!-- end cell -->
+                    </div>
+                    <!-- end grid-x -->
+                </div>
+                <!-- end copyright-section -->
+
+
+            </div>
+
+        </div>
+        <!-- end grid-container -->
+
+
+
+        <div class="footer__wrapper"></div>
+
+    </footer>
+</body>
+
+</html>
