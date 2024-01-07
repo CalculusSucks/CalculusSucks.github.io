@@ -57,10 +57,7 @@ html {
 
 
 @media (max-width: 600px) {
-    .gif {
-        width: 75vw;
-        /* Adjusted for smaller screens */
-    }
+
 
     .logo {
         width: 45vw;
